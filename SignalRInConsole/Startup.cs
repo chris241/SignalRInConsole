@@ -17,19 +17,21 @@ namespace SignalRInConsole
         }
 
         public IConfiguration Configuration { get; }
-
         public void ConfigurServices(IServiceCollection services)
         {
-            services.AddSignalR().Services.AddEndpointsApiExplorer();
+            services.AddSignalR();
         }
+
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
             app.UseEndpoints(endPoints =>
             {
-                endPoints.MapHub<ChatHub>("/");
+                endPoints.MapHub<ChatHub>("/chatHub");
             });
         }
+
+
 
     }
 }
