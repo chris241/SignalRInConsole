@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace signalRInConsole
 {
@@ -23,6 +25,19 @@ namespace signalRInConsole
         }
 
          public IConfiguration Configuration { get; }
+
+        public void ConfigurServices(IServiceCollection services)
+        {
+            services.AddSignalR();
+        }
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseRouting();
+            app.UseEndpoints(endPoints =>
+            {
+                endPoints.MapHub<ChatHub>("/chatHub");
+            });
+        }
 
     }
 
